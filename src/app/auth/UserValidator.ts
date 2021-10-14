@@ -1,6 +1,4 @@
 import UserConfig from '../configs/userConfig';
-import Connection from '../database/Сonnection';
-import Collections from '../types/collections';
 
 class UserValidator {
   private readonly username: string;
@@ -20,16 +18,6 @@ class UserValidator {
     }
 
     return true;
-  }
-
-  public async isExists(): Promise<boolean> {
-    const db = await Connection.getInstance();
-    const userCollection = db.connection.db.collection(Collections.User);
-
-    return !!(await userCollection.findOne({
-      username: this.username,
-      password: this.password,
-    }));
   }
 }
 

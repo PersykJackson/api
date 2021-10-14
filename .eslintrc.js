@@ -22,5 +22,6 @@ module.exports = {
     'no-shadow': 'off',
     'no-else-return': 'off',
     'class-methods-use-this': 'off',
+    'operator-linebreak': 'off',
   },
 };
