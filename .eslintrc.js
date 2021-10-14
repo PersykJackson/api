@@ -11,12 +11,16 @@ module.exports = {
   },
   plugins: ['@typescript-eslint', 'prettier'],
   rules: {
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-shadow': ['error'],
     'prettier/prettier': ['error', { singleQuote: true }],
     'no-console': 'off',
     'comma-dangle': 'off',
-    '@typescript-eslint/no-explicit-any': 'off',
     'import/extensions': 'off',
     'import/no-unresolved': 'off',
     'import/no-extraneous-dependencies': 'off',
+    'no-shadow': 'off',
+    'no-else-return': 'off',
+    'class-methods-use-this': 'off',
   },
 };

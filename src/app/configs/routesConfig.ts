@@ -1,5 +1,6 @@
 import { request, response } from 'express';
 import register from '../../routes/register';
+import authorization from '../../routes/authorization';
 
 interface RoutesConfig {
   [key: string]: [
@@ -9,7 +10,10 @@ interface RoutesConfig {
 }
 
 const routesConfig: RoutesConfig = {
-  post: [['/user', register]],
+  post: [
+    ['/user', register],
+    ['/authorization', authorization],
+  ],
 };
 
 export default routesConfig;

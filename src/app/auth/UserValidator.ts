@@ -1,39 +1,35 @@
-import { Collection } from 'mongodb/mongodb.ts34';
 import UserConfig from '../configs/userConfig';
+import Connection from '../database/Сonnection';
+import Collections from '../types/collections';
 
 class UserValidator {
   private readonly username: string;
 
   private readonly password: string;
 
-  private userCollection: Collection;
-
-  constructor({
-    username,
-    password,
-    userCollection,
-  }: {
-    username: string;
-    password: string;
-    userCollection: Collection;
-  }) {
+  constructor({ username, password }: { username: string; password: string }) {
     this.username = username;
     this.password = password;
-    this.userCollection = userCollection;
   }
 
-  public async isValid(): Promise<boolean> {
-    const user = await this.userCollection.findOne({ username: this.username });
-
+  public isValid(): boolean {
     if (this.username.length < UserConfig.usernameLength) {
       return false;
-    }
-
-    if (this.password.length < UserConfig.passwordLength) {
+    } else if (this.password.length < UserConfig.passwordLength) {
       return false;
     }
 
-    return !user;
+    return true;
+  }
+
+  public async isExists(): Promise<boolean> {
+    const db = await Connection.getInstance();
+    const userCollection = db.connection.db.collection(Collections.User);
+
+    return !!(await userCollection.findOne({
+      username: this.username,
+      password: this.password,
+    }));
   }
 }
 
