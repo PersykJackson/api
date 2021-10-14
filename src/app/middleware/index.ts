@@ -9,7 +9,7 @@ const middleware = (
   const authorizationHeader = req.headers?.authorization;
 
   if (!authorizationHeader) {
-    res.status(403).send('Token not found!');
+    res.status(401).send('Token not found!');
 
     return;
   }
@@ -18,7 +18,7 @@ const middleware = (
 
   jwt.verify(token, process.env.SECRET_KEY, (error) => {
     if (error) {
-      res.status(403).send('Incorrect token!');
+      res.status(403).json('Incorrect token!');
     } else {
       next();
     }
