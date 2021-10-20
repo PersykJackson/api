@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 import * as crypto from 'crypto';
 import routesConfig from './app/configs/routesConfig';
+import mediaServer from './mediaServer';
 
 dotenv.config();
 
@@ -19,3 +20,5 @@ process.env.SECRET_KEY = crypto.randomBytes(64).toString('hex');
 app.listen(process.env.PORT, () => {
   console.log('Server has been started!');
 });
+
+mediaServer.run();
