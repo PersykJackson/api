@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 import * as crypto from 'crypto';
+import cors from 'cors';
 import routesConfig from './app/configs/routesConfig';
 import mediaServer from './mediaServer';
 
@@ -9,6 +10,7 @@ dotenv.config();
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
 app.use(bodyParser.json());
 
 routesConfig.post.forEach(([route, callback]) => {

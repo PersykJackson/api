@@ -24,8 +24,10 @@ const authorization = async (req: typeof request, res: typeof response) => {
 
       res.status(200).json(`Bearer ${token}`);
     } else {
-      res.status(400).json('Incorrect login or password!');
+      res.status(404).json('Incorrect username or password!');
     }
+  } else {
+    res.status(422).json('Username or password not found in request!');
   }
 };
 
