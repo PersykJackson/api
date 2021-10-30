@@ -23,6 +23,7 @@
     "@types/express": "^4.17.13",
     "@types/mongoose": "^5.11.97",
     "@types/node": "^16.10.3",
+    "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-airbnb-typescript": "^14.0.1",
