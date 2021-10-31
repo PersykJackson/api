@@ -1,10 +1,14 @@
 import { request, response } from 'express';
+import bcrypt from 'bcrypt';
 import UserValidator from '../app/auth/UserValidator';
 import Connection from '../app/database/Сonnection';
 import Collections from '../app/types/collections';
 import User from '../app/models/User';
 
-const registration = async (req: typeof request, res: typeof response) => {
+const registration = async (
+  req: typeof request,
+  res: typeof response
+): Promise<void> => {
   if (req.body.username && req.body.password) {
     const { username, password } = req.body;
     const db = await Connection.getInstance();
@@ -26,7 +30,9 @@ const registration = async (req: typeof request, res: typeof response) => {
       return;
     }
 
-    const result = await userCollection.insertOne({ username, password });
+    const salt = bcrypt.genSaltSync(Number(process.env.PASSWORD_STRONG));
+    const hash = bcrypt.hashSync(password, salt);
+    const result = await userCollection.insertOne({ username, password: hash });
 
     if (result) {
       res.status(200).json('Success!');
