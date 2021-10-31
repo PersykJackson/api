@@ -19,7 +19,7 @@ const authentication = async (
     const userModel = new User(await Connection.getInstance());
     const user = await userModel.findUser(username);
 
-    if (validator.isValid()) {
+    if (validator.isValid() && user) {
       const isCorrectPassword = bcrypt.compareSync(password, user.password);
 
       if (isCorrectPassword) {
@@ -31,6 +31,8 @@ const authentication = async (
       } else {
         res.status(404).json('Incorrect username or password!');
       }
+    } else {
+      res.status(404).json('Incorrect username or password!');
     }
   } else {
     res.status(422).json('Username or password not found in request!');
