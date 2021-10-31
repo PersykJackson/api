@@ -4,7 +4,7 @@ import Connection from '../app/database/Сonnection';
 import Collections from '../app/types/collections';
 import User from '../app/models/User';
 
-const register = async (req: typeof request, res: typeof response) => {
+const registration = async (req: typeof request, res: typeof response) => {
   if (req.body.username && req.body.password) {
     const { username, password } = req.body;
     const db = await Connection.getInstance();
@@ -36,4 +36,4 @@ const register = async (req: typeof request, res: typeof response) => {
   }
 };
 
-export default register;
+export default registration;

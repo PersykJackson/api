@@ -4,7 +4,7 @@ import UserValidator from '../app/auth/UserValidator';
 import User from '../app/models/User';
 import Connection from '../app/database/Сonnection';
 
-const authorization = async (req: typeof request, res: typeof response) => {
+const authentication = async (req: typeof request, res: typeof response) => {
   if (req.body.username && req.body.password) {
     const { username, password } = req.body;
 
@@ -31,4 +31,4 @@ const authorization = async (req: typeof request, res: typeof response) => {
   }
 };
 
-export default authorization;
+export default authentication;
