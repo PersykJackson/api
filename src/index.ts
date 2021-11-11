@@ -5,8 +5,11 @@ import * as crypto from 'crypto';
 import cors from 'cors';
 import routesConfig from './app/configs/routesConfig';
 import mediaServer from './mediaServer';
+import imageCron from './app/helpers/imageCron';
 
 dotenv.config();
+
+imageCron.start();
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
