@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 import * as crypto from 'crypto';
 import cors from 'cors';
+import path from 'path';
 import routesConfig from './app/configs/routesConfig';
 import mediaServer from './mediaServer';
 import imageCron from './app/helpers/imageCron';
@@ -20,6 +21,11 @@ routesConfig.post.forEach(([route, callback]) => {
   app.post(route, callback);
 });
 
+routesConfig.get.forEach(([route, callback]) => {
+  app.get(route, callback);
+});
+
+process.env.APP_ROOT = path.resolve(`${__dirname}/..`);
 process.env.SECRET_KEY = crypto.randomBytes(64).toString('hex');
 
 app.listen(process.env.PORT, () => {
