@@ -1,4 +1,4 @@
-import { Collection } from 'mongodb/mongodb.ts34';
+import { Collection } from 'mongoose/node_modules/mongodb/mongodb';
 import mongoose from 'mongoose';
 import { Document } from 'bson';
 import Collections from '../types/collections';
@@ -9,7 +9,7 @@ class User {
   constructor(db: typeof mongoose) {
     this.userCollection = db.connection.db.collection(
       Collections.User
-    ) as unknown as Collection<Document>;
+    ) as Collection<Document>;
   }
 
   public async isUserExists(username: string): Promise<boolean> {
